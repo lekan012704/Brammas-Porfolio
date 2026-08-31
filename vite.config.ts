@@ -12,4 +12,11 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    server: {
+      allowedHosts: [
+        "930bf921-b6c8-42e4-b75c-f8afdc65a435-00-14zcssab1ito0.reed.replit.dev",
+      ],
+    },
+  },
 });
