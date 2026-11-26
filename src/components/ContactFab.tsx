@@ -38,7 +38,7 @@ export function ContactFab() {
   return (
     <div
       ref={wrapRef}
-      className="fixed right-5 bottom-5 z-50 flex flex-col items-end gap-3"
+      className="fixed right-5 bottom-20 z-50 flex flex-col items-end gap-3 md:bottom-5"
     >
       <div
         className={`flex flex-col items-end gap-2 transition-all duration-200 ${

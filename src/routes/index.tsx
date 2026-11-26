@@ -8,6 +8,7 @@ import {
   Mail,
   MapPin,
   MessageCircle,
+  Navigation,
   Phone,
   Refrigerator,
   ShieldCheck,
@@ -20,18 +21,19 @@ import { Toaster } from "@/components/ui/sonner";
 import { ContactFab } from "@/components/ContactFab";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { ContactForm } from "@/components/ContactForm";
-import { mailHref, site, telHref, waHref } from "@/lib/site";
+import { FindUsSection } from "@/components/FindUsSection";
+import { directionsHref, mailHref, site, telHref, waHref } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Brammas Cooling Solution | AC, Cold Room & Refrigeration" },
+      { title: `${site.name} | AC, Cold Room & Refrigeration` },
       {
         name: "description",
         content:
           "Installation, repair and servicing of air conditioning, cold rooms and refrigeration for homes and businesses. 24/7 callouts, quote before work.",
       },
-      { property: "og:title", content: "Brammas Cooling Solution" },
+      { property: "og:title", content: site.name },
       {
         property: "og:description",
         content:
@@ -115,6 +117,7 @@ const navLinks = [
   { label: "Services", href: "#services" },
   { label: "About", href: "#about" },
   { label: "Why Us", href: "#why" },
+  { label: "Find us", href: "#find-us" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -300,9 +303,11 @@ function Index() {
           </div>
         </section>
 
-        <section id="contact" className="bg-secondary/60 py-16 lg:py-20">
+        <FindUsSection />
+
+        <section id="contact" className="py-16 lg:py-20">
           <div className="section-shell">
-            <SectionHead num="04" title="Get In Touch" />
+            <SectionHead num="05" title="Get In Touch" />
             <p className="-mt-6 mb-10 max-w-[52ch] text-muted-foreground">
               Send your details and we'll come back with a quote — or reach us directly on the
               numbers below.
@@ -348,19 +353,45 @@ function Index() {
         </section>
       </main>
 
-      <footer className="border-t border-border py-8">
-        <div className="section-shell flex flex-wrap items-center justify-between gap-3">
+      <footer className="border-t border-border pt-8 pb-24 md:pb-8">
+        <div className="section-shell flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2.5">
             <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <Snowflake className="size-4" />
             </span>
             <span className="font-display text-sm font-bold">{site.name}</span>
           </div>
+          <nav aria-label="Footer navigation" className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href} className="transition-colors hover:text-primary">
+                {link.label}
+              </a>
+            ))}
+          </nav>
           <p className="text-xs text-faint">
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
         </div>
       </footer>
+
+      <div className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-2.5 border-t border-border bg-background/95 px-4 py-2.5 backdrop-blur-md md:hidden">
+        <a
+          href={telHref}
+          className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-border bg-card px-3 py-2.5 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"
+        >
+          <Phone className="size-4 shrink-0" />
+          Call
+        </a>
+        <a
+          href={directionsHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary px-3 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+        >
+          <Navigation className="size-4 shrink-0" />
+          Directions
+        </a>
+      </div>
 
       <ContactFab />
     </div>
